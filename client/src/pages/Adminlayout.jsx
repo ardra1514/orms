@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import '../styles/layout.css';
+//import '../styles/layout.css';
 import {Link,useLocation} from 'react-router-dom'
 const Adminlayout = ({children}) => {
     const [collapsed,setCollapsed] = useState(false);

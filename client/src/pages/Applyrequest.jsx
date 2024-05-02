@@ -108,30 +108,33 @@
 
 
     import React, { useState } from 'react';
-// import '../styles/signup.css';
+
 import { Button, Form, Input,message } from 'antd'
 import {Link,useNavigate}  from "react-router-dom";
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import '../App.css'
 
 
 const Applyrequest = () => {
   const [name,setName] = useState()
   const [email,setEmail] = useState()
   const [department,setDepartment] = useState()
-  const [password,setPassword] = useState()
-  const [reason,setReason] = useState()
+
+  const [subject,setSubject] = useState()
   const [content,setContent] = useState()
+  const [year,setYear] = useState()
+
 
 
   const navigate = useNavigate()
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    axios.post('http://localhost:4000/applyrequest',{name,email,department,password,reason,content})
+    axios.post('http://localhost:4000/applyrequest',{name,email,department,year,subject,content})
     .then(result => {console.log(result)
       alert("created")
-      navigate('/userdash')
+      navigate('/userdash/home')
     })
 
     .catch(err =>console.log(err))
@@ -141,121 +144,92 @@ const Applyrequest = () => {
 
 
   return (
-    
-    <div className='container'>
-    <div>
-    <h2>APPLY REQUEST</h2>
-    <h4>FROM</h4>
-    <form layout='vertical' onSubmit={handleSubmit}>
-      <div className="user-details">
-    <div className='input-box'>
-        <label htmlFor='email'>
-        <strong>name</strong>
+    <div id='apply'> 
+  <div className='applywrapper'>
+    <div id=''>
+      <h2>APPLY REQUEST</h2>
+      <h4>FROM</h4>
+      <form layout='vertical' onSubmit={handleSubmit}>
+        <div className="user-details">
+          <div className='input-box'>
+            <label htmlFor='name'>Name</label>
+            <input
+              type='text'
+              placeholder='Enter Name'
+              autoComplete='off'
+              name='name'
+              onChange={(e)=> setName(e.target.value)}
+            />
+          </div>
 
-        </label>
-        <input
-        type='text'
-        placeholder='enter name'
-        autoComplete='off'
-        name='email'
-        onChange={(e)=> setName(e.target.value)}
-        >
+          <div className='input-box'>
+            <label htmlFor='email'>Email</label>
+            <input
+              type='text'
+              placeholder='Enter Email'
+              autoComplete='off'
+              name='email'
+              onChange={(e)=> setEmail(e.target.value)}
+            />
+          </div>
 
-       </input>
+          <div className='input-box'>
+            <label htmlFor='department'>Department</label>
+            <input
+              type='text'
+              placeholder='Enter Department'
+              autoComplete='off'
+              name='department'
+              onChange={(e)=> setDepartment(e.target.value)}
+            />
+          </div>
+
+          <div className='input-box'>
+            <label htmlFor='year'>Year</label>
+            <input
+              type='text'
+              placeholder='Enter Year'
+              autoComplete='off'
+              name='year'
+              onChange={(e)=> setYear(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div className='reason'>
+          <h4>REASON</h4>
+
+          <div className='input-box-content'>
+            <label htmlFor='subject'>Subject</label>
+            <input
+              type='text'
+              placeholder='Enter Subject'
+              autoComplete='off'
+              name='subject'
+              onChange={(e)=> setSubject(e.target.value)}
+            />
+          </div>
+
+          <div className='input-box-content'>
+            <label htmlFor='content'>Content</label>
+            <input
+              type='text'
+              placeholder='Enter Content'
+              autoComplete='off'
+              name='content'
+              onChange={(e)=> setContent(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div>
+          <button htmlType='submit'>Submit</button>
+        </div>
+      </form>
     </div>
-    <div  className='input-box'>
-      <label htmlFor='email'>
-        < strong>email</strong>
-      </label>
-      <input
-        type='text'
-        placeholder='enter email'
-        autoComplete='off'
-        name='email'
-        onChange={(e)=> setEmail(e.target.value)}
-
-        >
-       </input>
-    </div>
-    <div  className='input-box'>
-    <label htmlFor='email'>
-        < strong>department</strong>
-      </label>
-      <input
-        type='text'
-        placeholder='enter department'
-        autoComplete='off'
-        name='department'
-        onChange={(e)=> setDepartment(e.target.value)}
-
-        >
-       </input>
-
-
-    </div>
-    <div  className='input-box'>
-    <label htmlFor='email'>
-        < strong>email</strong>
-      </label>
-      <input
-        type='text'
-        placeholder='enter password'
-        autoComplete='off'
-        name='password'
-        onChange={(e)=> setPassword(e.target.value)}
-
-        >
-       </input>
-
-     
-
-    </div>
-    <div className='htitle'>
-        <h4>REASONS</h4>
-      </div>
-    <div  className='input-box'>
-    <label htmlFor='email'>
-        < strong>subject</strong>
-      </label>
-      <input
-        type='text'
-        placeholder='enter subject'
-        autoComplete='off'
-        name='subject'
-        onChange={(e)=> setPassword(e.target.value)}
-
-        >
-       </input>
-
-
-    </div>
-    <div  className='input-box'>
-    <label htmlFor='email'>
-        < strong>content</strong>
-      </label>
-      <input
-        type='text'
-        placeholder='enter content'
-        autoComplete='off'
-        name='content'
-        onChange={(e)=> setPassword(e.target.value)}
-
-        >
-       </input>
-
-
-    </div>
-    {/* <button className='primary-button my-3' htmlType='submit'> Apply</button> */}
-    </div>
-    <div className='button'>
-    {/* <button  htmlType='submit'> Register</button> */}
-    <input type='submit' vocab='apply'></input>
-    </div>
-    </form>
-
-    </div>
-
+  </div>
 </div>
+
   )
 }
 

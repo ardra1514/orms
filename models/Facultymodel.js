@@ -25,6 +25,5 @@ const facultyschema = new mongoose.Schema({
 
 })
     const facultymodels = mongoose.model('req',facultyschema)
-    //users=collection name
 
     module.exports = facultymodels

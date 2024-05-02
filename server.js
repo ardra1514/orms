@@ -110,17 +110,67 @@ app.post('/addstudent',(req,res) => {
 
 app.post('/applyrequest',(req,res) => {
             const {name,email,department,year,password,subject,content}=(req.body)
-            bcrypt.hash(password,10)
-            .then(hash => {
-                facultymodels.create({name,email,department,password:hash,subject,content})
-                .then(user => res.json("success"))
-                .catch(err => res.json(err))
-            }).catch(err => res.json(err))
+        
+            
+            facultymodels.create({name,email,department,year,subject,content})
+            .then(users => res.json(users))
+            .catch(err => res.json(err))
             
         
         })
-        
+        app.get('/getrequest',(req,res) => {
+            
+            facultymodels.find()
+            .then(users => res.json(users))
+            .catch(err => res.json(err))
+        })
 
+
+            // Import necessary modules and setup your app
+
+// Middleware to verify JWT token and extract user information
+const verifyToken = (req, res, next) => {
+    const token = req.cookies.token;
+    if (!token) {
+        return res.status(401).json({ error: 'Unauthorized: No token provided' });
+    }
+
+    jwt.verify(token, "jwt-secret-key", (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ error: 'Unauthorized: Invalid token' });
+        }
+        req.user = decoded; // Extracted user information from token
+        next();
+    });
+};
+
+// Route to get user profile
+app.get('/profile', verifyToken, (req, res) => {
+    // Assuming you have the email or ID of the user in req.user
+    const userEmail = req.user.email; // Extracting email from token
+
+    // Query user profile from the database using userEmail
+    usermodels.findOne({ email: userEmail })
+        .then(user => {
+            if (!user) {
+                return res.status(404).json({ error: 'User not found' });
+            }
+            // If user profile found, send it as response
+            res.json({ profile: user });
+        })
+        .catch(err => {
+            console.error(err);
+            res.status(500).json({ error: 'Internal server error' });
+        });
+});
+
+
+
+
+
+
+
+       
 
 app.listen(4000,() => {
     console.log("server is running")

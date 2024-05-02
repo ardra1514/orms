@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/signup.css';
+
 import { Button, Form, Input,message } from 'antd'
 import {Link,useNavigate}  from "react-router-dom";
 import axios from 'axios';

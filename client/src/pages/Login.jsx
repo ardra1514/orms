@@ -1,9 +1,12 @@
 
 import React, { useState } from 'react';
-import '../styles/signup.css';
+import '../styles/forms.css'
 import { Button, Form, Input } from 'antd'
 import {Link, useNavigate} from "react-router-dom";
 import axios from 'axios';
+import {FaUser} from "react-icons/fa"
+import {FaLock} from "react-icons/fa"
+
 
 
 const Login = () => {
@@ -22,68 +25,77 @@ const Login = () => {
       console.log(result)
       if(result.data.Status === "success"){
         if(result.data.role === "admin"){
-          navigate('/dash')
+          navigate('/dash/admin')
         }
         else{
-           navigate('/userdash/home')
+           navigate('/userdash/profile')
           setError(result.data.Err)
           // alert("success")
 
         }
       }
+      else{
+        setError(result.data.Err); 
+        alert('wrong password or id')
+
+      }
+        
+
     })
     .catch(err =>console.log(err))
   }
 
   return (
-    <div className='container'>
+    <div id='loginform'>
+    <div className='wrapper'>
 
-<div  className=''>
-        <h1 className='title'>LOGIN FORM</h1>
+<div  className='form-box login'>
                 <form onSubmit={handleSubmit}>
-                  <div className="user-details">
-                <div className='input-box'>
-                  <label htmlFor='email'>
-                    < strong>email</strong>
-                  </label>
-                  <input
-                    type='text'
-                    placeholder='enter email'
-                    autoComplete='off'
-                    name='email'
-                    onChange={(e)=> setEmail(e.target.value)}
 
-                  
+                      <h1 id='title'className='title'>LOGIN FORM</h1>
+                      <div className="input-box">
+                          <label htmlFor='email'>
+                           <strong></strong>
 
-                    >
-                   </input>
-                </div>
-                <div className='input-box' >
-                <label htmlFor='email'>
-                    < strong>password</strong>
-                  </label>
-                  <input
-                    type='text'
-                    placeholder='enter password'
-                    autoComplete='off'
-                    name='password'
-                    onChange={(e)=> setPassword(e.target.value)}
+                                  </label>
+                                 <input
+                                 type='text'
+                                 placeholder='Enter Email'
+                                  autoComplete='off'
+                                 name='email'
+                                  onChange={(e)=> setEmail(e.target.value)}
+                                  >
 
+                                 </input>
+                                 <FaUser className='icon'/>
 
-                    >
-                   </input>
+                      </div>
+                      <div className="input-box">
+                          <label htmlFor='email'>
+                           <strong></strong>
 
+                                  </label>
+                                 <input
+                                 type='text'
+                                 placeholder='Enter Password'
+                                  autoComplete='off'
+                                 name='email'
+                                  onChange={(e)=> setPassword(e.target.value)}
+                                  >
+                                 </input>
+                                 <FaLock className='icon'/>
+                      
+                      </div>
+                        <div>
+                               <button htmlType='submit'> Login</button>
 
-                </div>
-                </div>
-                <div className='button'>
-    {/* <button  htmlType='submit'> Register</button> */}
-    <input type='submit' vocab='apply'></input>
-    </div>
-                {/* <button className='primary-button my-3' htmlType='submit'> Register</button> */}
+                        </div>
+                        &nbsp;
+                      <Link>Forgot password?</Link>
+                      {/* <button className='primary-button my-3' htmlType='submit'> Register</button> */}
 
-                </form>
-                <Link to ='/signup' className='anchor'>Already have an account? Login</Link>
+                       </form>
+                    
 
          
 
@@ -94,6 +106,7 @@ const Login = () => {
 {error && error}
   </div>
 
+    </div>
     </div>
   )
 }

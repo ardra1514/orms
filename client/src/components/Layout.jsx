@@ -1,7 +1,7 @@
 // import React, { Children } from 'react'
 // import { Sidebarmenu } from '../data/data';
 import React, { useState } from 'react';
-import '../styles/layout.css';
+
 import {Link,useLocation} from 'react-router-dom'
 
 const Layout = ({children}) => {

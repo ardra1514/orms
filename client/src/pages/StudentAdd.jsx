@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/studentadd.css';
+import'../App.css'
 import { Button, Form, Input,message } from 'antd'
 import {Link,useNavigate}  from "react-router-dom";
 import axios from 'axios';
@@ -29,20 +29,20 @@ const StudentAdd = () => {
 
 
   return (
-    
-    <div className='container'>
-    <div  className="">
-    <h1 className='title'>SIGNUP FORM</h1>
+    <div id='apply'>
+    <div className='wrapper'>
+    <div  className="form-box add">
+    <h1 id='title'>ADD STUDENT</h1>
     <form onSubmit={handleSubmit}>
         <div className="user-details">
     <div className='input-box'>
         <label htmlFor='email'>
-        <strong>name</strong>
+        <strong>Name:</strong>
 
         </label>
         <input
         type='text'
-        placeholder='enter name'
+        placeholder='Enter Name'
         autoComplete='off'
         name='email'
         onChange={(e)=> setName(e.target.value)}
@@ -52,11 +52,11 @@ const StudentAdd = () => {
     </div>
     <div className='input-box'>
       <label htmlFor='email'>
-        < strong>email</strong>
+        < strong>Email:</strong>
       </label>
       <input
         type='text'
-        placeholder='enter email'
+        placeholder='Enter Email'
         autoComplete='off'
         name='email'
         onChange={(e)=> setEmail(e.target.value)}
@@ -66,11 +66,11 @@ const StudentAdd = () => {
     </div>
     <div className='input-box'>
     <label htmlFor='email'>
-        < strong>department</strong>
+        < strong>Department</strong>
       </label>
       <input
         type='text'
-        placeholder='enter department'
+        placeholder='Enter Department'
         autoComplete='off'
         name='department'
         onChange={(e)=> setDepartment(e.target.value)}
@@ -82,11 +82,11 @@ const StudentAdd = () => {
     </div>
     <div className='input-box'>
     <label htmlFor='email'>
-        < strong>email</strong>
+        < strong>Password</strong>
       </label>
       <input
         type='text'
-        placeholder='enter password'
+        placeholder='Enter Password'
         autoComplete='off'
         name='password'
         onChange={(e)=> setPassword(e.target.value)}
@@ -100,13 +100,15 @@ const StudentAdd = () => {
     
     </div>
     <div className='button'>
-    {/* <button  htmlType='submit'> Register</button> */}
-    <input type='submit' vocab='apply'></input>
+      <br></br>
+    <button  htmlType='submit'> Add student</button>
+    {/* <input type='submit' vocab='apply'></input> */}
     </div>
     </form>
     </div>
 
 </div> 
+</div>
   )
 }
 
