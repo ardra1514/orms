@@ -1,72 +1,86 @@
 
 
-
-
-
-
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import axios from 'axios';
-import { Button, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Admhome = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios.get('http://localhost:4000/getrequest')
+    axios.get('http://localhost:4001/getrequest')
       .then(response => setUsers(response.data))
       .catch(err => console.log(err));
   }, []);
 
-  const handleAccept = () => {
-    // Perform accept action here
-    // For now, let's just navigate to the "Accepted" page
-    // You might want to handle this differently based on your requirements
-    window.location.href = '/userdash/home';
+  const handleAccept = async (userId) => {
+    try {
+      await axios.put(`http://localhost:4001/updaterequest/${userId}`, { stus: 'Accepted' });
+      setUsers(prevUsers => prevUsers.map(user => user._id === userId ? { ...user, stus: 'Accepted' } : user));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const handleReject = async (userId) => {
+    try {
+      await axios.put(`http://localhost:4001/updaterequest/${userId}`, { stus: 'Rejected' });
+      setUsers(prevUsers => prevUsers.map(user => user._id === userId ? { ...user, stus: 'Rejected' } : user));
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
-   
-
     <div>
-    <TableContainer>
-      <Table>
-        <TableHead>
-          <TableRow>
-            <TableCell>NAME</TableCell>
-            <TableCell>EMAIL</TableCell>
-            <TableCell>SUBJECT</TableCell>
-            <TableCell>CONTENT</TableCell>
-            <TableCell>STATUS</TableCell>
-
-
-          </TableRow>
-        </TableHead>
-         <TableBody>
-           {
-             users.map(user => {return (
-             <TableRow>
-              <TableCell >{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>{user.subject}</TableCell>
-              <TableCell>{user.content}</TableCell>
-              <TableCell>
-              <Button variant="contained" color="primary" class="btn btn-primary btn-sm">ACCEPT</Button>
-              <Button variant="contained" color="primary" class="btn btn-primary btn-sm">REJECT</Button>
-              </TableCell>
-            </TableRow >
-            )               
-          })}
-        </TableBody>
-      </Table>
-    </TableContainer>
-  </div>
-
-
-
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>NAME</TableCell>
+              <TableCell>EMAIL</TableCell>
+              <TableCell>SUBJECT</TableCell>
+              <TableCell>CONTENT</TableCell>
+              <TableCell>STATUS</TableCell>
+              <TableCell>ACTION</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {users.map(user => (
+              <TableRow key={user._id}>
+                <TableCell>{user.name}</TableCell>
+                <TableCell>{user.email}</TableCell>
+                <TableCell>{user.subject}</TableCell>
+                <TableCell>{user.content}</TableCell>
+                <TableCell>{user.stus}</TableCell>
+                <TableCell>
+                  {user.stus !== 'Accepted' && user.stus !== 'Rejected' && (
+                    <>
+                      <Button variant="contained" color="primary" size="small" onClick={() => handleAccept(user._id)}>
+                        ACCEPT
+                      </Button>
+                      <Button variant="contained" color="error" size="small" onClick={() => handleReject(user._id)}>
+                        REJECT
+                      </Button>
+                    </>
+                  )}
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+    </div>
   );
 };
 
 export default Admhome;
+
+
+
+
+
+
+
 

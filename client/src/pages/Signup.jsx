@@ -15,7 +15,7 @@ const Signup = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    axios.post('http://localhost:4000/add',{name,email,password})
+    axios.post('http://localhost:4001/add',{name,email,password})
     .then(result => {console.log(result)
       alert("created")
       navigate('/')

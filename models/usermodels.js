@@ -28,7 +28,11 @@ const userschema = new mongoose.Schema({
             
 
 
-    }
+    },
+    stus:{
+        type:String ,
+        default:'pending'
+    },
 
 })
     const usermodels = mongoose.model('users',userschema)

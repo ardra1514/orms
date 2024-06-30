@@ -49,7 +49,7 @@ const ProfilePage = () => {
   
   useEffect(() => {
     // Make API call to fetch user profile data
-    axios.get('http://localhost:4000/profile', { withCredentials: true })
+    axios.get('http://localhost:4001/profile', { withCredentials: true })
         .then(response => {
             setProfileData(response.data.profile);
         })
@@ -80,11 +80,12 @@ return (
               )}
           </div>
       </div>
+{/* 
       <div>
-          {/* Add navigation links */}
-          <Link to="/dashboard" className="btn btn-primary mr-3">Dashboard</Link>
+          <Link to="/dashboard" className="btn btn-primary mr-3">Dashboardz</Link>
           <Link to="/settings" className="btn btn-primary">Settings</Link>
       </div>
+       */}
   </div>
 
 

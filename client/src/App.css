@@ -55,9 +55,7 @@ form button{
     text-align: center;
     margin-right: 0px;
   }
-  #apply h4{
-    
-  }
+  
   
   .user-details {
     display: grid;
@@ -115,9 +113,4 @@ form button{
   
   .sidebarcolor {
     background-color:rgb(68, 67, 67);
-  }
-  h1{
-            
-    /* text-align: center; */
-/* padding: 40px; */
   }

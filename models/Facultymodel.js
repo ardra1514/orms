@@ -7,7 +7,10 @@ const facultyschema = new mongoose.Schema({
     year:String,
     subject:String ,
     content:String ,
-
+    stus:{
+        type:String ,
+        default:'pending'
+    },
    
     seennotification:{
         type:Array,

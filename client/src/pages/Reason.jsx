@@ -6,7 +6,7 @@ import axios from 'axios';
 const Reason = () => {
     const [users,setUsers] = useState([])
   useEffect(()=>{
-          axios.get('http://localhost:4000/getrequest')
+          axios.get('http://localhost:4001/getrequest')
       
         .then(users => setUsers(users.data))
           .catch(err => console.log(err))

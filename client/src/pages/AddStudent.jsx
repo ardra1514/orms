@@ -16,7 +16,7 @@ const AddStudent = () => {
 
   const handleSubmit = (e) =>{
     e.preventDefault()
-    axios.post('http://localhost:4000/addstudent',{name,email,department,password})
+    axios.post('http://localhost:4001/addstudent',{name,email,department,password})
     .then(result => {console.log(result)
       alert("created")
       navigate('/dash/student')
