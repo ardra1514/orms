@@ -1,4 +1,4 @@
-# Subject Inline Request Management System
+ONLINE REQUEST MANAGEMENT SYSTEM(ORMS)
 
 A **full-stack Request Management System** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js) to streamline online request submissions and approvals in an academic environment.
 
